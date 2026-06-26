@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Development Documentation</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: #0f0e1a; }
+:root {
+  --doc-bg: #0f0e1a;
+  --sidebar-bg: #13112a;
+  --border-c: #2e2a55;
+  --purple: #7c6ff7;
+  --purple-light: #a99ff9;
+  --text-main: #e8e6ff;
+  --text-muted: #9b96c8;
+  --code-bg: #0d0b1e;
+  --tag-bg: #2a2550;
+}
+.wrap { display: flex; min-height: 100vh; background: var(--doc-bg); }
+.sidebar { width: 220px; background: var(--sidebar-bg); border-right: 0.5px solid var(--border-c); padding: 20px 0; flex-shrink: 0; position: fixed; height: 100vh; overflow-y: auto; }
+.sidebar-title { font-size: 11px; font-weight: bold; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px 10px; }
+.nav-link { display: block; padding: 8px 18px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; cursor: pointer; }
+.nav-link:hover { color: var(--purple-light); background: rgba(124,111,247,0.07); }
+.nav-link.active { color: var(--purple-light); border-left-color: var(--purple); background: rgba(124,111,247,0.1); }
+.nav-section { font-size: 11px; font-weight: bold; color: #4a4575; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 18px 4px; }
+.content { flex: 1; padding: 40px 48px; margin-left: 220px; max-width: 860px; }
+.page-badge { display: inline-block; background: var(--tag-bg); color: var(--purple-light); font-size: 11px; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; border: 0.5px solid var(--border-c); }
+h1 { font-size: 28px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
+.subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+.section { margin-bottom: 40px; display: none; }
+.section.active { display: block; }
+h2 { font-size: 17px; font-weight: 500; color: var(--text-main); margin-bottom: 12px; margin-top: 24px; padding-bottom: 8px; border-bottom: 0.5px solid var(--border-c); }
+p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.code-block { background: var(--code-bg); border: 0.5px solid var(--border-c); border-radius: 8px; padding: 16px; margin: 12px 0; overflow-x: auto; }
+.code-block pre { font-family: 'Courier New', monospace; font-size: 13px; color: #c4bfff; line-height: 1.6; white-space: pre; }
+.kw { color: #bd9dff; }
+.str { color: #7ec8a0; }
+.cm { color: #4a4575; }
+.tag-c { color: #ff9eb0; }
+.attr { color: #ffcc80; }
+.prop-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+.prop-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 0.5px solid var(--border-c); }
+.prop-table td { padding: 10px 12px; color: var(--text-muted); border-bottom: 0.5px solid rgba(46,42,85,0.5); vertical-align: top; }
+.prop-table td:first-child { color: var(--purple-light); font-family: 'Courier New', monospace; font-size: 12px; }
+.prop-table td:nth-child(2) { color: #7ec8a0; font-family: 'Courier New', monospace; font-size: 12px; }
+.note { background: rgba(124,111,247,0.08); border-left: 3px solid var(--purple); border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 12px 0; }
+.note p { margin: 0; font-size: 13px; }
+code { font-family: 'Courier New', monospace; font-size: 12px; background: var(--tag-bg); color: var(--purple-light); padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="sidebar">
+    <div class="sidebar-title">Web Dev Docs</div>
+    <div class="nav-section">Basics</div>
+    <a class="nav-link active" onclick="show('intro', this)">Introduction</a>
+    <a class="nav-link" onclick="show('html', this)">HTML structure</a>
+    <a class="nav-link" onclick="show('css', this)">CSS styling</a>
+    <div class="nav-section">JavaScript</div>
+    <a class="nav-link" onclick="show('js', this)">JS fundamentals</a>
+    <a class="nav-link" onclick="show('dom', this)">DOM manipulation</a>
+    <div class="nav-section">Reference</div>
+    <a class="nav-link" onclick="show('props', this)">CSS properties</a>
+  </nav>
+
+  <main class="content">
+
+    <div id="sec-intro" class="section active">
+      <span class="page-badge">Getting started</span>
+      <h1>Web Development Fundamentals</h1>
+      <p class="subtitle">A beginner-friendly reference guide covering HTML, CSS, and JavaScript — the three core technologies of the web.</p>
+      <div class="note"><p>This documentation was created as a vocational training project demonstrating full-stack web knowledge.</p></div>
+      <h2>What is web development?</h2>
+      <p>Web development is the process of building websites and web applications. It involves three core technologies working together:</p>
+      <p><code>HTML</code> — defines the structure and content of a page.</p>
+      <p><code>CSS</code> — controls the visual appearance and layout.</p>
+      <p><code>JavaScript</code> — adds interactivity and dynamic behavior.</p>
+      <h2>How they work together</h2>
+      <div class="code-block"><pre><span class="cm">&lt;!-- HTML: structure --&gt;</span>
+<span class="tag-c">&lt;button</span> <span class="attr">class</span>=<span class="str">"btn"</span> <span class="attr">id</span>=<span class="str">"myBtn"</span><span class="tag-c">&gt;</span>Click me<span class="tag-c">&lt;/button&gt;</span>
+
+<span class="cm">/* CSS: style */</span>
+<span class="kw">.btn</span> { <span class="attr">background</span>: <span class="str">purple</span>; <span class="attr">color</span>: <span class="str">white</span>; }
+
+<span class="cm">// JavaScript: behavior</span>
+<span class="kw">document</span>.getElementById(<span class="str">"myBtn"</span>).onclick = () =&gt; {
+  alert(<span class="str">"Hello!"</span>);
+};</pre></div>
+    </div>
+
+    <div id="sec-html" class="section">
+      <span class="page-badge">HTML</span>
+      <h1>HTML structure</h1>
+      <p class="subtitle">HTML (HyperText Markup Language) defines the structure and meaning of web content using elements called tags.</p>
+      <h2>Basic document structure</h2>
+      <p>Every HTML page starts with a standard boilerplate. The <code>&lt;head&gt;</code> contains metadata, while <code>&lt;body&gt;</code> holds visible content.</p>
+      <div class="code-block"><pre><span class="tag-c">&lt;!DOCTYPE html&gt;</span>
+<span class="tag-c">&lt;html</span> <span class="attr">lang</span>=<span class="str">"en"</span><span class="tag-c">&gt;</span>
+  <span class="tag-c">&lt;head&gt;</span>
+    <span class="tag-c">&lt;meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span><span class="tag-c">&gt;</span>
+    <span class="tag-c">&lt;meta</span> <span class="attr">name</span>=<span class="str">"viewport"</span> <span class="attr">content</span>=<span class="str">"width=device-width"</span><span class="tag-c">&gt;</span>
+    <span class="tag-c">&lt;title&gt;</span>My Page<span class="tag-c">&lt;/title&gt;</span>
+  <span class="tag-c">&lt;/head&gt;</span>
+  <span class="tag-c">&lt;body&gt;</span>
+    <span class="tag-c">&lt;h1&gt;</span>Hello, World!<span class="tag-c">&lt;/h1&gt;</span>
+    <span class="tag-c">&lt;p&gt;</span>Welcome to my page.<span class="tag-c">&lt;/p&gt;</span>
+  <span class="tag-c">&lt;/body&gt;</span>
+<span class="tag-c">&lt;/html&gt;</span></pre></div>
+      <h2>Semantic elements</h2>
+      <p>Semantic tags give meaning to content, improving accessibility and SEO.</p>
+      <div class="code-block"><pre><span class="tag-c">&lt;header&gt;</span>  <span class="cm">— top navigation / logo area</span>
+<span class="tag-c">&lt;nav&gt;</span>     <span class="cm">— navigation links</span>
+<span class="tag-c">&lt;main&gt;</span>    <span class="cm">— primary page content</span>
+<span class="tag-c">&lt;section&gt;</span> <span class="cm">— thematic grouping of content</span>
+<span class="tag-c">&lt;article&gt;</span> <span class="cm">— self-contained content block</span>
+<span class="tag-c">&lt;aside&gt;</span>   <span class="cm">— sidebar or related content</span>
+<span class="tag-c">&lt;footer&gt;</span>  <span class="cm">— bottom information</span></pre></div>
+      <h2>Common tags</h2>
+      <div class="code-block"><pre><span class="tag-c">&lt;h1&gt;</span> to <span class="tag-c">&lt;h6&gt;</span>  <span class="cm">— headings (h1 = largest)</span>
+<span class="tag-c">&lt;p&gt;</span>           <span class="cm">— paragraph</span>
+<span class="tag-c">&lt;a href=""&gt;</span>   <span class="cm">— hyperlink</span>
+<span class="tag-c">&lt;img src=""&gt;</span>  <span class="cm">— image</span>
+<span class="tag-c">&lt;ul&gt;</span> / <span class="tag-c">&lt;li&gt;</span>  <span class="cm">— unordered list</span>
+<span class="tag-c">&lt;div&gt;</span>         <span class="cm">— generic container</span>
+<span class="tag-c">&lt;span&gt;</span>        <span class="cm">— inline container</span></pre></div>
+    </div>
+
+    <div id="sec-css" class="section">
+      <span class="page-badge">CSS</span>
+      <h1>CSS styling</h1>
+      <p class="subtitle">CSS (Cascading Style Sheets) controls the visual presentation of HTML elements — colors, layout, fonts, spacing, and more.</p>
+      <h2>Selectors and properties</h2>
+      <div class="code-block"><pre><span class="cm">/* Element selector */</span>
+<span class="kw">h1</span> {
+  <span class="attr">font-size</span>: <span class="str">2rem</span>;
+  <span class="attr">color</span>: <span class="str">#333333</span>;
+}
+
+<span class="cm">/* Class selector */</span>
+<span class="kw">.card</span> {
+  <span class="attr">background</span>: <span class="str">white</span>;
+  <span class="attr">border-radius</span>: <span class="str">8px</span>;
+  <span class="attr">padding</span>: <span class="str">1rem</span>;
+  <span class="attr">box-shadow</span>: <span class="str">0 2px 8px rgba(0,0,0,0.1)</span>;
+}
+
+<span class="cm">/* ID selector */</span>
+<span class="kw">#header</span> {
+  <span class="attr">background</span>: <span class="str">#7c6ff7</span>;
+  <span class="attr">color</span>: <span class="str">white</span>;
+}</pre></div>
+      <h2>Flexbox layout</h2>
+      <div class="code-block"><pre><span class="kw">.container</span> {
+  <span class="attr">display</span>: <span class="str">flex</span>;
+  <span class="attr">justify-content</span>: <span class="str">space-between</span>; <span class="cm">/* horizontal */</span>
+  <span class="attr">align-items</span>: <span class="str">center</span>;           <span class="cm">/* vertical */</span>
+  <span class="attr">gap</span>: <span class="str">16px</span>;
+  <span class="attr">flex-wrap</span>: <span class="str">wrap</span>;
+}</pre></div>
+      <h2>Responsive design</h2>
+      <p>Use media queries to adapt layouts for different screen sizes.</p>
+      <div class="code-block"><pre><span class="cm">/* Mobile first approach */</span>
+<span class="kw">.grid</span> {
+  <span class="attr">display</span>: <span class="str">grid</span>;
+  <span class="attr">grid-template-columns</span>: <span class="str">1fr</span>; <span class="cm">/* 1 column on mobile */</span>
+}
+
+<span class="cm">/* Tablet and above */</span>
+<span class="kw">@media</span> (min-width: <span class="str">768px</span>) {
+  <span class="kw">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="str">repeat(3, 1fr)</span>; }
+}</pre></div>
+    </div>
+
+    <div id="sec-js" class="section">
+      <span class="page-badge">JavaScript</span>
+      <h1>JavaScript fundamentals</h1>
+      <p class="subtitle">JavaScript adds interactivity and dynamic behavior to web pages. It runs directly in the browser.</p>
+      <h2>Variables</h2>
+      <div class="code-block"><pre><span class="kw">const</span> name = <span class="str">"Jubby"</span>;       <span class="cm">// cannot be reassigned</span>
+<span class="kw">let</span> age = <span class="str">21</span>;               <span class="cm">// can be reassigned</span>
+<span class="kw">var</span> city = <span class="str">"Delhi"</span>;         <span class="cm">// old way, avoid using</span></pre></div>
+      <h2>Data types</h2>
+      <div class="code-block"><pre><span class="kw">const</span> text = <span class="str">"Hello"</span>;          <span class="cm">// String</span>
+<span class="kw">const</span> number = <span class="str">42</span>;             <span class="cm">// Number</span>
+<span class="kw">const</span> isTrue = <span class="str">true</span>;           <span class="cm">// Boolean</span>
+<span class="kw">const</span> skills = [<span class="str">"HTML"</span>, <span class="str">"CSS"</span>]; <span class="cm">// Array</span>
+<span class="kw">const</span> user = { name: <span class="str">"Coco"</span>, age: <span class="str">21</span> }; <span class="cm">// Object</span></pre></div>
+      <h2>Functions</h2>
+      <div class="code-block"><pre><span class="cm">// Regular function</span>
+<span class="kw">function</span> greet(name) {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}!`</span>;
+}
+
+<span class="cm">// Arrow function (modern)</span>
+<span class="kw">const</span> greet = (name) =&gt; <span class="str">`Hello, ${name}!`</span>;
+
+console.log(greet(<span class="str">"World"</span>)); <span class="cm">// Hello, World!</span></pre></div>
+      <h2>Conditionals and loops</h2>
+      <div class="code-block"><pre><span class="cm">// If statement</span>
+<span class="kw">if</span> (age &gt;= 18) {
+  console.log(<span class="str">"Adult"</span>);
+} <span class="kw">else</span> {
+  console.log(<span class="str">"Minor"</span>);
+}
+
+<span class="cm">// Loop through array</span>
+skills.forEach(skill =&gt; {
+  console.log(skill);
+});</pre></div>
+    </div>
+
+    <div id="sec-dom" class="section">
+      <span class="page-badge">DOM</span>
+      <h1>DOM manipulation</h1>
+      <p class="subtitle">The Document Object Model (DOM) lets JavaScript read and change HTML elements on the page in real time.</p>
+      <h2>Selecting elements</h2>
+      <div class="code-block"><pre><span class="cm">// Select by ID</span>
+<span class="kw">const</span> btn = document.getElementById(<span class="str">"myBtn"</span>);
+
+<span class="cm">// Select by class (returns first match)</span>
+<span class="kw">const</span> card = document.querySelector(<span class="str">".card"</span>);
+
+<span class="cm">// Select all matching elements</span>
+<span class="kw">const</span> cards = document.querySelectorAll(<span class="str">".card"</span>);</pre></div>
+      <h2>Changing content and style</h2>
+      <div class="code-block"><pre><span class="cm">// Change text</span>
+btn.textContent = <span class="str">"New text"</span>;
+
+<span class="cm">// Change HTML inside element</span>
+card.innerHTML = <span class="str">"&lt;strong&gt;Updated!&lt;/strong&gt;"</span>;
+
+<span class="cm">// Change CSS style</span>
+btn.style.backgroundColor = <span class="str">"purple"</span>;
+btn.style.color = <span class="str">"white"</span>;</pre></div>
+      <h2>Event listeners</h2>
+      <div class="code-block"><pre>btn.addEventListener(<span class="str">"click"</span>, () =&gt; {
+  console.log(<span class="str">"Button clicked!"</span>);
+});
+
+<span class="cm">// Mouse hover</span>
+card.addEventListener(<span class="str">"mouseover"</span>, () =&gt; {
+  card.style.transform = <span class="str">"scale(1.05)"</span>;
+});</pre></div>
+      <div class="note"><p>Always add event listeners after the DOM is loaded. Place your <code>&lt;script&gt;</code> tag just before the closing <code>&lt;/body&gt;</code> tag.</p></div>
+    </div>
+
+    <div id="sec-props" class="section">
+      <span class="page-badge">Reference</span>
+      <h1>CSS properties reference</h1>
+      <p class="subtitle">A quick reference table of commonly used CSS properties with accepted values and descriptions.</p>
+      <h2>Layout properties</h2>
+      <table class="prop-table">
+        <thead><tr><th>Property</th><th>Common values</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>display</td><td>flex, grid, block, none</td><td>Sets the layout mode of an element</td></tr>
+          <tr><td>position</td><td>relative, absolute, fixed, sticky</td><td>Controls positioning method</td></tr>
+          <tr><td>gap</td><td>8px, 1rem, 2%</td><td>Space between flex or grid items</td></tr>
+          <tr><td>padding</td><td>8px, 1rem 2rem, 10px 20px</td><td>Inner spacing inside the element</td></tr>
+          <tr><td>margin</td><td>auto, 0 1rem, 16px</td><td>Outer spacing outside the element</td></tr>
+          <tr><td>width / height</td><td>100%, 300px, auto</td><td>Dimensions of the element</td></tr>
+          <tr><td>border-radius</td><td>4px, 50%, 8px</td><td>Rounds the corners of an element</td></tr>
+          <tr><td>overflow</td><td>hidden, scroll, auto</td><td>Controls content that overflows</td></tr>
+        </tbody>
+      </table>
+      <h2>Typography properties</h2>
+      <table class="prop-table">
+        <thead><tr><th>Property</th><th>Common values</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>font-size</td><td>14px, 1rem, 1.2em</td><td>Sets the size of text</td></tr>
+          <tr><td>font-weight</td><td>400, 500, 700, bold</td><td>Controls text thickness</td></tr>
+          <tr><td>font-family</td><td>Arial, sans-serif, monospace</td><td>Specifies the font to use</td></tr>
+          <tr><td>line-height</td><td>1.5, 1.7, 24px</td><td>Sets vertical spacing between lines</td></tr>
+          <tr><td>text-align</td><td>left, center, right, justify</td><td>Horizontal text alignment</td></tr>
+          <tr><td>text-decoration</td><td>none, underline, line-through</td><td>Decorates text (links etc.)</td></tr>
+          <tr><td>color</td><td>#333, purple, rgb(0,0,0)</td><td>Sets the text color</td></tr>
+          <tr><td>letter-spacing</td><td>0.05em, 1px, normal</td><td>Space between characters</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
